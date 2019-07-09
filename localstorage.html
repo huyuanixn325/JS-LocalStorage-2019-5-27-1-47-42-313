@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Localstorage</title>
+</head>
+<body>
+<label>要显示的值：</label><input type="text" id="test">&nbsp;&nbsp;<button type="button" onclick="addNumber()">+1</button>
+</body>
+<script type="text/javascript">
+    var testDom = document.getElementById("test");
+    localStorage.setItem("value",0);
+    testDom.value=localStorage.getItem("value");
+    function addNumber(){
+        var testDom = document.getElementById("test");
+        if(!window.localStorage){
+            alert("浏览器不支持localstorage");
+            return false;
+        }else {
+            localStorage.setItem("value", parseInt(localStorage.getItem("value"))+1);
+            testDom.value=localStorage.getItem("value");
+        }
+
+    }
+</script>
+</html>
