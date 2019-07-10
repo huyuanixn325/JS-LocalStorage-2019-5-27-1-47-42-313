@@ -5,16 +5,25 @@
     <title>Localstorage</title>
 </head>
 <body>
-<label>Ҫ��ʾ��ֵ��</label><input type="text" id="test">&nbsp;&nbsp;<button type="button" onclick="addNumber()">+1</button>
+<label>要显示的值</label><input type="text" id="test">&nbsp;&nbsp;<button type="button" onclick="addNumber()">+1</button>
 </body>
 <script type="text/javascript">
     var testDom = document.getElementById("test");
-    localStorage.setItem("value",0);
+    if(window.name == ""){
+        console.log("首次被加载");
+        localStorage.setItem("value",0);
+        window.name = "isReload"; //在首次进入页面时我们可以给window.name设置一个固定值
+    }else if(window.name == "isReload"){
+        console.log("页面被刷新");
+        localStorage.setItem("value",localStorage.getItem("value"));
+    }
+
+    localStorage.setItem("value",localStorage.getItem("value"));
     testDom.value=localStorage.getItem("value");
     function addNumber(){
         var testDom = document.getElementById("test");
         if(!window.localStorage){
-            alert("�������֧��localstorage");
+            alert("浏览器不支持localstorage");
             return false;
         }else {
             localStorage.setItem("value", parseInt(localStorage.getItem("value"))+1);
